@@ -9,7 +9,7 @@ import BlogForm from './components/BlogForm'
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [newBlog, setNewBlog] = useState('')
-  const [showAll, setShowAll] = useState(true)
+  const [showAll, setShowAll] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
   const [successMessage, setSuccessMessage] = useState(null)
   const [username, setUsername] = useState('')
@@ -22,20 +22,19 @@ const App = () => {
   const blogFormRef = useRef()
 
   useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs( blogs )
-    )  
-  }, [])
+    blogService.getAll().then(blogs => {
+      blogs.sort((a, b) => b.likes - a.likes);
+      setBlogs(blogs);
+    });
+  }, []);
 
 
   const handleLogin = async (event) => {
     event.preventDefault()
-    console.log('logging in with', username, password)
     try {
       const user = await loginService.login({
         username, password,
       })
-      console.log('user', user)
       window.localStorage.setItem(
         'loggedBlogappUser', JSON.stringify(user)
       )
@@ -61,7 +60,7 @@ const App = () => {
   const loginForm = () => (
     <form onSubmit={handleLogin}>
       <div>
-        username
+        username:
         <input
           type="text"
           value={username}
@@ -70,7 +69,7 @@ const App = () => {
         />
       </div>
       <div>
-        password
+        password:
         <input
           type="password"
           value={password}
@@ -127,7 +126,7 @@ const App = () => {
         </Togglable>
         <h1>Blogs</h1>
         {blogs.map(blog =>
-          <Blog key={blog.id} blog={blog} />
+          <Blog key={blog.id} blog={blog} blogs={blogs} setBlogs={setBlogs} user={user} />
         )}
         </div>
       }

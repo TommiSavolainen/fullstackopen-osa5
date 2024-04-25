@@ -4,11 +4,24 @@ h1 {
   }
   
   .note {
-    color: grey;
-    padding-top: 3px;
+    color: black;
+    padding-top: 5px;
+    padding-bottom: 5px;
     font-size: 15px;
+    padding-left: 2px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    margin-bottom: 5px;
   }
-  
+
+p {
+    color: black;
+    font-size: 15px;
+    padding-left: 2px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
   .success {
     color: green;
     background: lightgrey;
