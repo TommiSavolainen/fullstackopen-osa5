@@ -77,18 +77,14 @@ test("like button is pressed twice and addLike function is called twice", async 
     const user1 = userEvent.setup();
     const viewButton = screen.getByText('view');
     fireEvent.click(viewButton);
-    
+    screen.debug(viewButton);
     const likeButton = screen.getByText('like');
-    user1.click(likeButton);
-    console.log(mockHandler);
-    user1.click(likeButton);
+    await user1.click(likeButton);
+    screen.debug(likeButton);
+    console.log(mockHandler.mock.calls);
+    await user1.click(likeButton);
 
-
-    // fireEvent.click(likeButton);
-    // fireEvent.click(likeButton);
-
-    
     // Check if the mockHandler was called twice
-    expect(mockHandler.calls.length).toBe(2);
+    expect(mockHandler.mock.calls.length).toHaveLength(2);
 
 });
