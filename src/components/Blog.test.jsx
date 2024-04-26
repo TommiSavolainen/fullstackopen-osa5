@@ -5,6 +5,7 @@ import userEvent from "@testing-library/user-event";
 
 
 
+
 test("renders title", () => {
     const user = {
         name: "Test user",
@@ -76,11 +77,10 @@ test("like button is pressed twice and addLike function is called twice", async 
     render(<Blog blog={blog} user={user} addLike={mockHandler} />);
     const user1 = userEvent.setup();
     const viewButton = screen.getByText('view');
-    fireEvent.click(viewButton);
-    screen.debug(viewButton);
+    await user1.click(viewButton);
     const likeButton = screen.getByText('like');
     await user1.click(likeButton);
-    screen.debug(likeButton);
+    screen.debug();
     console.log(mockHandler.mock.calls);
     await user1.click(likeButton);
 
