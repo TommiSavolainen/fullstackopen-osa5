@@ -51,7 +51,7 @@ const App = () => {
     }
     catch (exception) {
       console.log('exception', exception)
-      setErrorMessage('wrong username or password')
+      setErrorMessage('error: wrong username or password')
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000)
@@ -65,6 +65,7 @@ const App = () => {
           type="text"
           value={username}
           name="Username"
+          id='username'
           onChange={({ target }) => setUsername(target.value)}
         />
       </div>
@@ -74,10 +75,11 @@ const App = () => {
           type="password"
           value={password}
           name="Password"
+          id='password'
           onChange={({ target }) => setPassword(target.value)}
         />
       </div>
-      <button type="submit">login</button>
+      <button type="submit" id='login-button'>login</button>
     </form>
   )
 
