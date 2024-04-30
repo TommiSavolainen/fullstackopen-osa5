@@ -103,7 +103,7 @@ const App = () => {
           setSuccessMessage(`a new blog ${returnedBlog.title} by ${returnedBlog.author} added`)
           setTimeout(() => {
             setSuccessMessage(null)
-          }, 5000)
+          }, 2000)
         })
     }
     catch (exception) {
@@ -128,7 +128,7 @@ const App = () => {
         </Togglable>
         <h1>Blogs</h1>
         {blogs.map(blog =>
-          <Blog key={blog.id} blog={blog} blogs={blogs} setBlogs={setBlogs} user={user} />
+          <Blog key={blog.id} blog={blog} blogs={blogs} setBlogs={setBlogs} setSuccessMessage={setSuccessMessage} setErrorMessage={setErrorMessage} user={user} />
         )}
         </div>
       }

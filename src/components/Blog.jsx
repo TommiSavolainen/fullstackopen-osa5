@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import blogService from '../services/blogs';
-const Blog = ({ blog, blogs, setBlogs, user}) => {
+const Blog = ({ blog, blogs, setBlogs, setErrorMessage, setSuccessMessage, user}) => {
   const [visible, setVisible] = useState(false);
 
   const toggleVisibility = () => {
@@ -26,14 +26,16 @@ const Blog = ({ blog, blogs, setBlogs, user}) => {
         .remove(blog.id)
         .then(() => {
           setBlogs(blogs.filter((b) => b.id !== blog.id));
+          setSuccessMessage('Blog removed successfully');
         });
     }
   };
   let removeButton = {
     display: 'none',
   };
+
   
-  if (user.username === blog.user.username) {
+  if (user.username === blog.username) {
     removeButton = {
       display: 'block',
     };
@@ -47,7 +49,7 @@ const Blog = ({ blog, blogs, setBlogs, user}) => {
           <p>{blog.url}</p>
           <p>likes {blog.likes} <button onClick={addLike} className='likeButton'>like</button></p>
           <p>{blog.user.name}</p>
-          <button style={removeButton} onClick={removeBlog}>remove</button>
+          <button style={removeButton} id='remove-button' onClick={removeBlog}>remove</button>
         </div>
       )}
     </div>
